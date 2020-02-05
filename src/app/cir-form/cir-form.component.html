@@ -28,7 +28,7 @@
                         </div>
                     </mat-grid-tile>
                     <mat-grid-tile rowspan='1' colspan = '1'>
-                        <label>Priorities</label>
+                        <label>Priority</label>
                         <div>
                             <mat-radio-group aria-label="Priority" formControlName="priority">
                                 <mat-radio-button  type="radio" *ngFor="let level of priorities" [value]="level">{{level}}</mat-radio-button>
@@ -60,48 +60,66 @@
         </mat-step>
             <mat-step label="Who was involved" [stepControl]="WhoWasInvolved" >
                 <form  [formGroup]="WhoWasInvolved" >
-                        <mat-form-field>
-                            <mat-label>Supervisor</mat-label>
-                            <input matInput formControlName="supervisor" type="text">
-                        </mat-form-field><br>
-                       
+                    <mat-grid-list cols="4" rowHeight="200px">
+                        <mat-grid-tile rowspan='1' colspan = '1'>
+                            <mat-form-field>
+                                <mat-label>Supervisor</mat-label>
+                                <input matInput formControlName="supervisor" type="text">
+                            </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile rowspan='1' colspan = '4'>
                             <button (click)="addPerson()" *ngIf="peopleInvolved.controls.length < 6">Add Person</button>
-                            <div formArrayName="peopleInvolved">
-                                <div *ngFor="let person of peopleInvolved.controls; let i = index" [formGroupName]="i">
-                                    <input matInput  formControlName="firstname" placeholder="First Name" required>
-                                    <input matInput formControlName="lastname" placeholder="Last Name" required>
+                        </mat-grid-tile> 
+                        <mat-grid-tile rowspan='1' colspan = '4' formArrayName="peopleInvolved">
+                            <div *ngFor="let person of peopleInvolved.controls; let i = index" [formGroupName]="i">
+                                <mat-card><button mat-button color="warn"(click)="removeAPerson(i)">X</button>
+                                <input matInput  formControlName="firstname" placeholder="First Name" required>
+                                <input matInput formControlName="lastname" placeholder="Last Name" required>
+                                <mat-form-field>
+                                    <mat-label>Roles</mat-label>
                                     <mat-select formControlName="role" required>
                                         <mat-option  *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
-                                  </mat-select>
-                        </div>
-                    </div>
-                    <div>
-                        <button mat-button matStepperPrevious type="button">Previous</button>
-                        <button mat-button matStepperNext type="button">Next</button>
-                    </div>
-             </form>
-         </mat-step>
+                                     </mat-select>
+                                </mat-form-field></mat-card>
+                            </div>
+                        </mat-grid-tile>
+                        <mat-grid-tile rowspan='1' colspan = '4'>
+                            <button mat-button matStepperPrevious type="button">Previous</button>
+                            <button mat-button matStepperNext type="button">Next</button>
+                        </mat-grid-tile>  
+                    </mat-grid-list>     
+                 </form>
+            </mat-step>
   
     
         <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
            <form [formGroup]="IncidentSpecificDetails">
-            <mat-form-field class="example-full-width">
-                <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>
-            </mat-form-field><br>
-            <mat-form-field class="example-full-width">
-                <textarea class="textbox" matInput placeholder="Corrective Actions Taken" formControlName="correctiveAction"></textarea>
-            </mat-form-field><br>
-            <mat-form-field class="example-full-width">
-                <textarea class="textbox" matInput placeholder="afterCare" formControlName="afterCare"></textarea>
-            </mat-form-field><br>
-            <mat-form-field class="example-full-width">
-                <textarea class="textbox" matInput placeholder="Emergency Services" formControlName="emergencyServices"></textarea>
-            </mat-form-field><br>
-
-            <div>
-            <button mat-button matStepperPrevious type="button">Previous</button>
-            <button mat-button type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
-        </div>
+            <mat-grid-list cols="4" rowHeight="150px">
+                <mat-grid-tile rowspan='1' colspan = '2'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile rowspan='1' colspan = '2'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Corrective Actions Taken" formControlName="correctiveAction"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile rowspan='1' colspan = '2'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="afterCare" formControlName="afterCare"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile rowspan='1' colspan = '2'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Emergency Services" formControlName="emergencyServices"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile rowspan='1' colspan = '4'>
+                    <button mat-button matStepperPrevious type="button">Previous</button>
+                    <button mat-button type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
+                </mat-grid-tile>
+            </mat-grid-list>
     </form>
       </mat-step>
       <mat-step label="Done">

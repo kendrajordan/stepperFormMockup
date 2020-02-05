@@ -5,7 +5,7 @@ import { FormGroup, FormControl,Validators,FormBuilder,FormArray} from '@angular
 @Component({
   selector: 'app-cir-form',
   templateUrl: './cir-form.component.html',
-  styleUrls: ['./cir-form.component.css']
+  styleUrls: ['./cir-form.component.scss']
 })
 export class CirFormComponent implements OnInit {
   regions = ['Cumberland Plateau','north-central Bluegrass','Pennyroyal Plateau','Coal Fields','Jackson Purchase'];
@@ -93,5 +93,9 @@ export class CirFormComponent implements OnInit {
     }else if( step_1 != 'VALID') 
     alert('Please go back to "Incident Meta details" and complete the form.');
     return;
+   }
+   removeAPerson(index){
+     this.peopleInvolved.removeAt(index);
+     return this.peopleInvolved;
    }
 }
