@@ -1,0 +1,115 @@
+
+<mat-horizontal-stepper linear>
+  
+        <mat-step label="Incident Meta details" [stepControl]=" IncidentMetaDetails">
+           
+            <form  [formGroup]="IncidentMetaDetails">
+                <mat-grid-list cols="3" rowHeight="100px">
+
+                    <mat-grid-tile rowspan='1' colspan = '1'>
+                        <mat-form-field>
+                            <input formControlName="incidentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile rowspan='1' colspan = '1'>
+                        <mat-form-field>
+                            <mat-label>Location</mat-label>
+                            <input matInput formControlName="location" type="text">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile rowspan='1' colspan = '1'>
+                        <label>Type of Incident</label>
+                        <div>
+                                <mat-radio-group aria-label="Type of Incident" formControlName="incidentType">
+                                    <mat-radio-button  type="radio" *ngFor="let type of incidentTypes" [value]="type.value">{{type.name}}</mat-radio-button>
+                                </mat-radio-group>
+                        </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile rowspan='1' colspan = '1'>
+                        <label>Priorities</label>
+                        <div>
+                            <mat-radio-group aria-label="Priority" formControlName="priority">
+                                <mat-radio-button  type="radio" *ngFor="let level of priorities" [value]="level">{{level}}</mat-radio-button>
+                            </mat-radio-group>
+                        </div>  
+                    </mat-grid-tile>
+                    <mat-grid-tile rowspan='1' colspan = '1'>
+                        <mat-form-field>
+                            <mat-label>Select an region</mat-label>
+                            <mat-select formControlName="region">
+                            <mat-option  *ngFor="let region of regions" [value]="region">{{region}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile rowspan='1' colspan = '1'>
+                        <mat-form-field>
+                            <mat-label>Select an county</mat-label>
+                            <mat-select formControlName="county">
+                            <mat-option  *ngFor="let county of counties" [value]="county">{{county}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile rowspan='1' colspan = '3'>
+                        <button  mat-raised-button color="primary" matStepperNext type="button">Next</button>
+                    </mat-grid-tile >      
+            </mat-grid-list>
+        </form>
+        </mat-step>
+            <mat-step label="Who was involved" [stepControl]="WhoWasInvolved" >
+                <form  [formGroup]="WhoWasInvolved" >
+                        <mat-form-field>
+                            <mat-label>Supervisor</mat-label>
+                            <input matInput formControlName="supervisor" type="text">
+                        </mat-form-field><br>
+                       
+                            <button (click)="addPerson()" *ngIf="peopleInvolved.controls.length < 6">Add Person</button>
+                            <div formArrayName="peopleInvolved">
+                                <div *ngFor="let person of peopleInvolved.controls; let i = index" [formGroupName]="i">
+                                    <input matInput  formControlName="firstname" placeholder="First Name" required>
+                                    <input matInput formControlName="lastname" placeholder="Last Name" required>
+                                    <mat-select formControlName="role" required>
+                                        <mat-option  *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+                                  </mat-select>
+                        </div>
+                    </div>
+                    <div>
+                        <button mat-button matStepperPrevious type="button">Previous</button>
+                        <button mat-button matStepperNext type="button">Next</button>
+                    </div>
+             </form>
+         </mat-step>
+  
+    
+        <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
+           <form [formGroup]="IncidentSpecificDetails">
+            <mat-form-field class="example-full-width">
+                <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+                <textarea class="textbox" matInput placeholder="Corrective Actions Taken" formControlName="correctiveAction"></textarea>
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+                <textarea class="textbox" matInput placeholder="afterCare" formControlName="afterCare"></textarea>
+            </mat-form-field><br>
+            <mat-form-field class="example-full-width">
+                <textarea class="textbox" matInput placeholder="Emergency Services" formControlName="emergencyServices"></textarea>
+            </mat-form-field><br>
+
+            <div>
+            <button mat-button matStepperPrevious type="button">Previous</button>
+            <button mat-button type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
+        </div>
+    </form>
+      </mat-step>
+      <mat-step label="Done">
+            {{cirForm | json}}
+      </mat-step>
+          
+  </mat-horizontal-stepper>
+
+<p>
+ 
+  </p>
