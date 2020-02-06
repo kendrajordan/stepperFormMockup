@@ -40,7 +40,7 @@ export class CirFormComponent implements OnInit {
     });
     this.IncidentSpecificDetails = this.fb.group({
       narrative:['',Validators.maxLength(600)],
-      correctiveAction:['',Validators.maxLength(10)],
+      correctiveAction:['',Validators.maxLength(600)],
       preventativeAction:['',Validators.maxLength(600)],
       afterCare:['',Validators.required],
       emergencyServices:['',Validators.required]
@@ -57,6 +57,15 @@ export class CirFormComponent implements OnInit {
       lastname: ['',Validators.required],
       role: ['',Validators.required]
     }))
+  }
+  checkIfPersonAdded(){
+    if(this.peopleInvolved.length === 0){
+      console.log(this.peopleInvolved.length);
+      return false;
+    }else{
+      console.log(this.peopleInvolved.length);
+      return true;
+    }
   }
   onSubmit(){
     // TODO: Use EventEmitter with form value

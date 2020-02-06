@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CirFormComponent } from './cir-form/cir-form.component';
 import {MaterialModule} from './material/material.module';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import {MaterialModule} from './material/material.module';
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
- 
+    FlexLayoutModule
 
   ],
   providers: [],

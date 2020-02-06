@@ -4,122 +4,133 @@
         <mat-step label="Incident Meta details" [stepControl]=" IncidentMetaDetails">
            
             <form  [formGroup]="IncidentMetaDetails">
-                <mat-grid-list cols="3" rowHeight="100px">
-
-                    <mat-grid-tile rowspan='1' colspan = '1'>
-                        <mat-form-field>
-                            <input formControlName="incidentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                          </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile rowspan='1' colspan = '1'>
-                        <mat-form-field>
-                            <mat-label>Location</mat-label>
-                            <input matInput formControlName="location" type="text">
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile rowspan='1' colspan = '1'>
-                        <label>Type of Incident</label>
-                        <div>
-                                <mat-radio-group aria-label="Type of Incident" formControlName="incidentType">
-                                    <mat-radio-button  type="radio" *ngFor="let type of incidentTypes" [value]="type.value">{{type.name}}</mat-radio-button>
-                                </mat-radio-group>
+                <div class="container"  fxLayout.xs="column" fxLayout="row"  fxLayoutAlign="space-around">
+                    <div class="container"  class="imd-box" id="date-location" >
+                        <div fxLayout.xs="column" fxLayoutAlign.xs="center center">
+                            <mat-form-field>
+                                <input formControlName="incidentDate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
                         </div>
-                    </mat-grid-tile>
-                    <mat-grid-tile rowspan='1' colspan = '1'>
-                        <label>Priority</label>
-                        <div>
-                            <mat-radio-group aria-label="Priority" formControlName="priority">
-                                <mat-radio-button  type="radio" *ngFor="let level of priorities" [value]="level">{{level}}</mat-radio-button>
-                            </mat-radio-group>
-                        </div>  
-                    </mat-grid-tile>
-                    <mat-grid-tile rowspan='1' colspan = '1'>
-                        <mat-form-field>
-                            <mat-label>Select an region</mat-label>
-                            <mat-select formControlName="region">
-                            <mat-option  *ngFor="let region of regions" [value]="region">{{region}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile rowspan='1' colspan = '1'>
-                        <mat-form-field>
-                            <mat-label>Select an county</mat-label>
-                            <mat-select formControlName="county">
-                            <mat-option  *ngFor="let county of counties" [value]="county">{{county}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </mat-grid-tile>
-
-                    <mat-grid-tile rowspan='1' colspan = '3'>
+                        <div fxLayout.xs="column" fxLayoutAlign.xs="center center">
+                            <mat-form-field>
+                                <mat-label>Location</mat-label>
+                                <input matInput formControlName="location" type="text">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="container" class="imd-box"  id="priority-region" fxLayout="column"  fxLayoutGap.xs="5%" fxLayoutGap="10%" >
+                        <div  fxLayout.xs="column" fxLayoutAlign.xs="center center">
+                            <label>Priority</label>
+                            <div>
+                                <mat-radio-group fxLayout.xs="column" fxLayout.sm="column"  fxLayout.md="row" fxLayoutGap.md="10%" fxLayout.lg="row" fxLayoutGap.lg="10%" aria-label="Priority" formControlName="priority">
+                                    <mat-radio-button  type="radio" *ngFor="let level of priorities" [value]="level">{{level}}</mat-radio-button>
+                                </mat-radio-group>
+                            </div>  
+                        </div>
+                        <div  fxLayout.xs="column" fxLayoutAlign.xs="center center">
+                            <label>Type of Incident</label>
+                            <div>
+                                    <mat-radio-group  fxLayout.xs="column" fxLayout.sm="column"  fxLayout.md="row" fxLayoutGap.md="10%" fxLayout.lg="row" fxLayoutGap.lg="10%" aria-label="Type of Incident" formControlName="incidentType">
+                                        <mat-radio-button  type="radio" *ngFor="let type of incidentTypes" [value]="type.value">{{type.name}}</mat-radio-button>
+                                    </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container"  class="imd-box" id='region-county'>
+                        <div fxLayout.xs="column" fxLayoutAlign.xs="center center">
+                            <mat-form-field>
+                                <mat-label>Select a region</mat-label>
+                                <mat-select formControlName="region">
+                                <mat-option  *ngFor="let region of regions" [value]="region">{{region}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout.xs="column" fxLayoutAlign.xs="center center">
+                            <mat-form-field>
+                                <mat-label>Select a county</mat-label>
+                                <mat-select formControlName="county">
+                                <mat-option  *ngFor="let county of counties" [value]="county">{{county}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row"  fxLayoutAlign= "center center" class="imd-box">
+                    <div>
                         <button  mat-raised-button color="primary" matStepperNext type="button">Next</button>
-                    </mat-grid-tile >      
-            </mat-grid-list>
+                    </div > 
+                </div>     
         </form>
         </mat-step>
             <mat-step label="Who was involved" [stepControl]="WhoWasInvolved" >
                 <form  [formGroup]="WhoWasInvolved" >
-                    <mat-grid-list cols="4" rowHeight="200px">
-                        <mat-grid-tile rowspan='1' colspan = '1'>
+                    <div class="container" fxLayout="column">
+                        <div class=" container who-box">
                             <mat-form-field>
                                 <mat-label>Supervisor</mat-label>
                                 <input matInput formControlName="supervisor" type="text">
                             </mat-form-field>
-                        </mat-grid-tile>
-                        <mat-grid-tile rowspan='1' colspan = '4'>
-                            <button (click)="addPerson()" *ngIf="peopleInvolved.controls.length < 6">Add Person</button>
-                        </mat-grid-tile> 
-                        <mat-grid-tile rowspan='1' colspan = '4' formArrayName="peopleInvolved">
-                            <div *ngFor="let person of peopleInvolved.controls; let i = index" [formGroupName]="i">
-                                <mat-card><button mat-button color="warn"(click)="removeAPerson(i)">X</button>
-                                <input matInput  formControlName="firstname" placeholder="First Name" required>
-                                <input matInput formControlName="lastname" placeholder="Last Name" required>
-                                <mat-form-field>
-                                    <mat-label>Roles</mat-label>
-                                    <mat-select formControlName="role" required>
-                                        <mat-option  *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
-                                     </mat-select>
-                                </mat-form-field></mat-card>
-                            </div>
-                        </mat-grid-tile>
-                        <mat-grid-tile rowspan='1' colspan = '4'>
-                            <button mat-button matStepperPrevious type="button">Previous</button>
-                            <button mat-button matStepperNext type="button">Next</button>
-                        </mat-grid-tile>  
-                    </mat-grid-list>     
-                 </form>
+                        </div>
+                        <div class="container who-box" fxLayout="column">
+                            <div class="container" fxLayout="row"  fxLayoutAlign= "space-around center">
+                                <button  mat-raised-button color="accent" (click)="addPerson()" *ngIf="peopleInvolved.controls.length < 6">Add Person</button>
+                             </div>
+                             <div class="container who-box" fxLayout="row wrap"  fxLayoutAlign="center" fxLayoutGap="1%" formArrayName="peopleInvolved">
+                                <div *ngFor="let person of peopleInvolved.controls; let i = index;" [formGroupName]="i">
+                                    <mat-card class="container" fxLayout="column"  fxLayoutAlign="space-around">
+                                        <button mat-raised-button color="warn" (click)="removeAPerson(i)">Remove Person</button>
+                                        <input matInput  formControlName="firstname" placeholder="First Name" required>
+                                        <input matInput formControlName="lastname" placeholder="Last Name" required>
+                                        <mat-form-field>
+                                            <mat-label>Roles</mat-label>
+                                            <mat-select formControlName="role" required>
+                                                <mat-option  *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </mat-card>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                        <div class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%">
+                            <button mat-raised-button matStepperPrevious type="button">Previous</button>
+                            <button  mat-raised-button color="primary" matStepperNext type="button" (click)="checkIfPersonAdded()">Next</button>
+                        </div>
+                    
+                </form>
             </mat-step>
   
     
         <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
            <form [formGroup]="IncidentSpecificDetails">
-            <mat-grid-list cols="4" rowHeight="150px">
-                <mat-grid-tile rowspan='1' colspan = '2'>
+            <div class="container" fxLayout="row wrap" fxLayoutAlign= "center space-around"  fxLayoutGap="1%" >
+                <div class='id-box'>
                     <mat-form-field class="example-full-width">
                         <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>
                     </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile rowspan='1' colspan = '2'>
+                </div>
+                <div class='id-box'>
                     <mat-form-field class="example-full-width">
                         <textarea class="textbox" matInput placeholder="Corrective Actions Taken" formControlName="correctiveAction"></textarea>
                     </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile rowspan='1' colspan = '2'>
+                </div>
+                <div class='id-box'>
                     <mat-form-field class="example-full-width">
                         <textarea class="textbox" matInput placeholder="afterCare" formControlName="afterCare"></textarea>
                     </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile rowspan='1' colspan = '2'>
+                </div>
+                <div class='id-box'>
                     <mat-form-field class="example-full-width">
                         <textarea class="textbox" matInput placeholder="Emergency Services" formControlName="emergencyServices"></textarea>
                     </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile rowspan='1' colspan = '4'>
-                    <button mat-button matStepperPrevious type="button">Previous</button>
-                    <button mat-button type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
-                </mat-grid-tile>
-            </mat-grid-list>
+                </div>
+            </div>
+            <div class ='id-box'  class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%">
+                <button mat-raised-button matStepperPrevious type="button">Previous</button>
+                <button mat-button type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
+            </div>
     </form>
       </mat-step>
       <mat-step label="Done">
