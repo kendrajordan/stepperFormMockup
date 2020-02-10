@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {formData} from '../formdata';
 import {Person} from '../person';
 import { FormGroup, FormControl,Validators,FormBuilder,FormArray} from '@angular/forms';
+
 @Component({
   selector: 'app-cir-form',
   templateUrl: './cir-form.component.html',
@@ -21,11 +22,10 @@ export class CirFormComponent implements OnInit {
   WhoWasInvolved:FormGroup;
   IncidentSpecificDetails: FormGroup;
   cirForm:any;
-  constructor(private fb: FormBuilder) {}
-
+  constructor(private fb: FormBuilder,) {}
 
   ngOnInit() {
-    let person = new Person();
+    let person: Person = {firstname:'', lastname:'',role:''};
     this.IncidentMetaDetails = this.fb.group({
       incidentDate: ['',Validators.required],
       location: ['',Validators.required],
@@ -36,7 +36,13 @@ export class CirFormComponent implements OnInit {
     });
     this.WhoWasInvolved = this.fb.group({
       supervisor:  ['',Validators.required],
-      peopleInvolved: this.fb.array([])
+      peopleInvolved: this.fb.array([
+        this.fb.group({
+          firstname:['',Validators.required],
+          lastname: ['',Validators.required],
+          role: ['',Validators.required]
+        })
+      ])
     });
     this.IncidentSpecificDetails = this.fb.group({
       narrative:['',Validators.maxLength(600)],
@@ -51,30 +57,26 @@ export class CirFormComponent implements OnInit {
   get peopleInvolved() {
     return this.WhoWasInvolved.get('peopleInvolved') as FormArray;
   }
+  
   addPerson() {
     this.peopleInvolved.push(this.fb.group({
       firstname:['',Validators.required],
       lastname: ['',Validators.required],
       role: ['',Validators.required]
-    }))
+    }));
+   
+   
   }
-  checkIfPersonAdded(){
-    if(this.peopleInvolved.length === 0){
-      console.log(this.peopleInvolved.length);
-      return false;
-    }else{
-      console.log(this.peopleInvolved.length);
-      return true;
-    }
-  }
+
   onSubmit(){
-    // TODO: Use EventEmitter with form value
-  // console.warn(this.IncidentMetaDetails.value);
-   //console.warn(this.WhoWasInvolved.value);
-  // console.warn(this.IncidentSpecificDetails.value);
+ 
+  //console.warn(this.IncidentMetaDetails.value);
+  // console.warn(this.WhoWasInvolved.value);
+  //console.warn(this.IncidentSpecificDetails.value);
     let step_1 = this.IncidentMetaDetails.status;
     let step_2 = this.WhoWasInvolved.status;
     let step_3 = this.IncidentSpecificDetails.status;
+
     if(step_1 == 'VALID'&& step_2 == 'VALID' && step_3 == 'VALID'){
       let form = new formData();
       form.incidentDate = this.IncidentMetaDetails.value.incidentDate;

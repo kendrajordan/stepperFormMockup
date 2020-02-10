@@ -1,7 +1,7 @@
 
 <mat-horizontal-stepper linear>
   
-        <mat-step label="Incident Meta details" [stepControl]=" IncidentMetaDetails">
+        <mat-step label="Incident Meta details" [stepControl]=" IncidentMetaDetails" >
            
             <form  [formGroup]="IncidentMetaDetails">
                 <div class="container"  fxLayout.xs="column" fxLayout="row"  fxLayoutAlign="space-around">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div fxLayout="row"  fxLayoutAlign= "center center" class="imd-box">
+                <div fxLayout="row"  fxLayoutAlign= "center center" class="imd-box" style="margin-top:2%;">
                     <div>
                         <button  mat-raised-button color="primary" matStepperNext type="button">Next</button>
                     </div > 
@@ -73,14 +73,14 @@
                                 <input matInput formControlName="supervisor" type="text">
                             </mat-form-field>
                         </div>
-                        <div class="container who-box" fxLayout="column">
-                            <div class="container" fxLayout="row"  fxLayoutAlign= "space-around center">
+                        <div class="container who-box" fxLayout="column" fxLayout.md="column" fxLayoutGap="2%">
+                            <div class="container" fxLayout="row"  fxLayoutAlign= "space-around space-around">
                                 <button  mat-raised-button color="accent" (click)="addPerson()" *ngIf="peopleInvolved.controls.length < 6">Add Person</button>
                              </div>
-                             <div class="container who-box" fxLayout="row wrap"  fxLayoutAlign="center" fxLayoutGap="1%" formArrayName="peopleInvolved">
-                                <div *ngFor="let person of peopleInvolved.controls; let i = index;" [formGroupName]="i">
-                                    <mat-card class="container" fxLayout="column"  fxLayoutAlign="space-around">
-                                        <button mat-raised-button color="warn" (click)="removeAPerson(i)">Remove Person</button>
+                             <div class="container who-box viewport" fxLayout="row wrap"  fxLayoutAlign="center" fxLayoutGap="1%" formArrayName="peopleInvolved">
+                                
+                                    <mat-card *ngFor="let person of peopleInvolved.controls; let i = index;" [formGroupName]="i"class="container" fxLayout="column"  fxLayoutAlign="center space-around" >
+                                        <button *ngIf="peopleInvolved.controls.length > 1" mat-raised-button color="warn" (click)="removeAPerson(i)">Remove Person</button>
                                         <input matInput  formControlName="firstname" placeholder="First Name" required>
                                         <input matInput formControlName="lastname" placeholder="Last Name" required>
                                         <mat-form-field>
@@ -90,13 +90,13 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </mat-card>
-                                </div>
-                            </div> 
+                                
+                                </div> 
                         </div>
                     </div>
-                        <div class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%">
+                        <div class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%" style="margin-top:2%;">
                             <button mat-raised-button matStepperPrevious type="button">Previous</button>
-                            <button  mat-raised-button color="primary" matStepperNext type="button" (click)="checkIfPersonAdded()">Next</button>
+                            <button  mat-raised-button color="primary"  type="button" matStepperNext>Next</button>
                         </div>
                     
                 </form>
@@ -105,7 +105,7 @@
     
         <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
            <form [formGroup]="IncidentSpecificDetails">
-            <div class="container" fxLayout="row wrap" fxLayoutAlign= "center space-around"  fxLayoutGap="1%" >
+            <div class="container" fxLayout="row wrap" fxLayoutAlign= "space-between space-around"  fxLayoutGap="1%" >
                 <div class='id-box'>
                     <mat-form-field class="example-full-width">
                         <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>

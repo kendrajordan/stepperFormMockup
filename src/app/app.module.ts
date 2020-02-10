@@ -7,12 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CirFormComponent } from './cir-form/cir-form.component';
 import {MaterialModule} from './material/material.module';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ScrollingModule } from "@angular/cdk/scrolling";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CirFormComponent
+    CirFormComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -21,7 +23,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ScrollingModule,
 
   ],
   providers: [],

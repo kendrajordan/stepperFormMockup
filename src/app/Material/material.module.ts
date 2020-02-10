@@ -11,7 +11,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
-const materialComponents = [ MatSliderModule,MatCardModule,MatStepperModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatIconModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatGridListModule,MatButtonModule];
+import {ScrollingModule} from '@angular/cdk/scrolling';
+const materialComponents = [ MatSliderModule,MatCardModule,MatStepperModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatIconModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatGridListModule,MatButtonModule,ScrollingModule];
 @NgModule ({
   imports: [materialComponents],
   exports:[materialComponents],

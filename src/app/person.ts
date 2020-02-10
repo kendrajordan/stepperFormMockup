@@ -1,9 +1,9 @@
-export class Person {
+export interface Person {
 
-
-        public firstname: string;
-        public lastname: string;
-        public role: string;
+  
+       firstname: string
+       lastname: string
+       role: string
 
   
   }

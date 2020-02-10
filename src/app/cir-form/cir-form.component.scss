@@ -1,6 +1,8 @@
-.textbox {
-    width: 800px;
-    height:100px;
+.example-full-width {
+    width: 100%;
+}
+.id-box{
+    width:auto;
 }
 .dl-box{
     background-color:blue;
@@ -9,6 +11,16 @@
 }
 .mat-raised-button{
     overflow-wrap: break-word;
+}
+.who-box{
+    width:100%;
+}
+    .viewport{
+   height: 300px;
+   overflow-y: scroll ;
+}
+.mat-card{
+    height: 200px;
 }
 
 
