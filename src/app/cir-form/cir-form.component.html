@@ -105,7 +105,7 @@
     
         <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
            <form [formGroup]="IncidentSpecificDetails">
-            <div class="container" fxLayout="row wrap" fxLayoutAlign= "space-between space-around"  fxLayoutGap="1%" >
+            <div class="details-container" fxLayout="row wrap" fxLayoutAlign= "space-between space-around"  fxLayoutGap="1%" >
                 <div class='id-box'>
                     <mat-form-field class="example-full-width">
                         <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>
@@ -129,7 +129,7 @@
             </div>
             <div class ='id-box'  class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%">
                 <button mat-raised-button matStepperPrevious type="button">Previous</button>
-                <button mat-button type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
+                <button mat-raised-button color="primary" type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
             </div>
     </form>
       </mat-step>
