@@ -7,11 +7,11 @@ export interface DialogData {
   incident:any;
   }
 @Component({
-  selector: 'app-cir-form',
-  templateUrl: './cir-form.component.html',
-  styleUrls: ['./cir-form.component.scss']
+  selector: 'app-cir-form-edit',
+  templateUrl: '../cir-form-edit/cir-form-edit.component.html',
+  styleUrls: ['../cir-form-edit/cir-form-edit.component.scss']
 })
-export class CirFormComponent implements OnInit {
+export class EditCirFormComponent implements OnInit {
   regions = ['Cumberland Plateau','north-central Bluegrass','Pennyroyal Plateau','Coal Fields','Jackson Purchase'];
   counties = ['Anderson', 'Bath', 'Bell', 'Boone', 'Bourbon', 'Boyd', 'Boyle', 'Bracken', 'Breathitt', 'Bullitt', 'Campbell', 'Carroll', 'Carter', 'Casey', 'Clark', 'Clay', 'Elliott', 'Estill','Fayette', 'Fleming', 'Floyd', 'Franklin', 'Gallatin', 'Garrard', 'Grant', 'Greenup', 'Hardin', 'Harlan', 'Harrison', 'Henry', 'Jackson', 'Jefferson', 'Jessamine', 'Johnson', 'Kenton','Knott', 'Knox', 'LaRue', 'Laurel', 'Lawrence', 'Lee', 'Leslie', 'Letcher', 'Lewis', 'Lincoln', 'Madison', 'Magoffin', 'Marion', 'Martin', 'Mason', 'McCreary', 'Meade', 'Menifee', 'Mercer', 'Montgomery', 'Morgan', 'Nelson', 'Nicholas', 'Oldham', 'Owen', 'Owsley', 'Pendleton', 'Perry', 'Pike', 'Powell', 'Pulaski', 'Robertson', 'Rockcastle', 'Rowan', 'Scott', 'Shelby', 'Spencer', 'Taylor', 'Trimble', 'Washington', 'Wayne', 'Whitley', 'Wolfe','Woodford'];
   priorities = ['High','Low'];
@@ -27,24 +27,24 @@ export class CirFormComponent implements OnInit {
   cirForm:any;
   myIncidentModel:any;
   incident:any;
-  constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<CirFormComponent>,
+  constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<EditCirFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData ) {
-      this.incident = data;
+      this.incident = data.incident;
     }
 
   ngOnInit() {
     
     let person: Person = {firstname:'', lastname:'',role:''};
     this.IncidentMetaDetails = this.fb.group({
-      incidentDate: ['',Validators.required],
-      location: ['',Validators.required],
-      incidentType: ['',Validators.required],
-      priority:  ['',Validators.required],
-      region:  ['',Validators.required],
-      county: ['',Validators.required]
+      incidentDate: [this.incident.incidentDate,Validators.required],
+      location: [this.incident.location,Validators.required],
+      incidentType: [this.incident.incidentType,Validators.required],
+      priority:  [this.incident.priority,Validators.required],
+      region:  [this.incident.region,Validators.required],
+      county: [this.incident.county,Validators.required]
     });
     this.WhoWasInvolved = this.fb.group({
-      supervisor:  ['',Validators.required],
+      supervisor:  [this.incident.supervisor,Validators.required],
       peopleInvolved: this.fb.array([
         this.fb.group({
           firstname:['',Validators.required],
@@ -54,14 +54,15 @@ export class CirFormComponent implements OnInit {
       ])
     });
     this.IncidentSpecificDetails = this.fb.group({
-      narrative:['',Validators.maxLength(600)],
-      correctiveAction:['',Validators.maxLength(600)],
-      preventativeAction:['',Validators.maxLength(600)],
-      afterCare:['',Validators.required],
-      emergencyServices:['',Validators.required]
+      narrative:[this.incident.narrative,Validators.maxLength(600)],
+      correctiveAction:[this.incident.correctiveAction,Validators.maxLength(600)],
+      preventativeAction:[this.incident.preventativeAction,Validators.maxLength(600)],
+      afterCare:[this.incident.afterCare,Validators.required],
+      emergencyServices:[this.incident.emergencyServices,Validators.required]
     });
-
+    console.log(this.fillForm());
   }
+  
 //getter
   get peopleInvolved() {
     return this.WhoWasInvolved.get('peopleInvolved') as FormArray;
@@ -77,6 +78,25 @@ export class CirFormComponent implements OnInit {
    
   }
 
+
+  fillForm(){
+    if (this.incident){
+      if(this.WhoWasInvolved.value.peopleInvolved > 0){
+        this.WhoWasInvolved.value.peopleInvolved =[];
+      }
+      if (this.incident.peopleInvolved>0){
+        for (let person of this.incident.peopleInvolved){
+          this.peopleInvolved.push(this.fb.array([this.fb.group({
+            firstname:[ person.firstname,Validators.required],
+            lastname: [person.lastname,Validators.required],
+            role: [person.role ,Validators.required]
+          })]));
+
+        }
+      }
+     }
+     return 'call fillform';
+  }
   onSubmit(){
  
   //console.warn(this.IncidentMetaDetails.value);

@@ -1,0 +1,37 @@
+
+
+
+<h2>Incidents table</h2>
+
+<mat-table [dataSource] = 'incidents'>
+    <ng-container  matColumnDef="Incident Id">
+        <mat-header-cell *matHeaderCellDef>Incident Id</mat-header-cell>
+        <mat-cell *matCellDef="let incident">{{incident.incidentId}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Incident Date">
+        <mat-header-cell *matHeaderCellDef>incident Date</mat-header-cell>
+        <mat-cell *matCellDef="let incident">{{incident.incidentDate | date:'shortDate'}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Nature of Incident">
+        <mat-header-cell *matHeaderCellDef>Nature of Incident</mat-header-cell>
+        <mat-cell *matCellDef="let incident">{{incident.incidentType}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Region">
+        <mat-header-cell *matHeaderCellDef>Region</mat-header-cell>
+        <mat-cell *matCellDef="let incident">{{incident.region}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="County">
+        <mat-header-cell *matHeaderCellDef>County</mat-header-cell>
+        <mat-cell *matCellDef="let incident">{{incident.county}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Location">
+        <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+        <mat-cell *matCellDef="let incident">{{incident.location}}</mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Edit">
+        <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+        <mat-cell *matCellDef="let incident"><button mat-raised-button (click)="openDialog(incident.incidentId)">Edit</button></mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+</mat-table>

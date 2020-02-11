@@ -2,7 +2,7 @@
 <mat-horizontal-stepper linear>
     
         <mat-step label="Incident Meta details" [stepControl]=" IncidentMetaDetails" >
-            {{data.incident |json}}
+            <h1>Edit</h1>
             <form  [formGroup]="IncidentMetaDetails">
                 <div class="container"  fxLayout.xs="column" fxLayout="row"  fxLayoutAlign="space-around">
                     <div class="container"  class="imd-box" id="date-location" >
