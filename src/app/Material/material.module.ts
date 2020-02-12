@@ -14,7 +14,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
-const materialComponents = [ MatSliderModule,MatCardModule,MatStepperModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatIconModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatGridListModule,MatButtonModule,ScrollingModule,MatTableModule,MatDialogModule];
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+const materialComponents = [ MatSliderModule,MatCardModule,MatStepperModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatIconModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatGridListModule,MatButtonModule,ScrollingModule,MatTableModule,MatDialogModule,MatPaginatorModule,MatToolbarModule,
+  MatMenuModule];
 @NgModule ({
   imports: [materialComponents],
   exports:[materialComponents],

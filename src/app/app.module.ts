@@ -12,17 +12,21 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { IncidentListComponent} from './incident-list/incident-list.component';
 import {IncidentService} from './incident.service';
 import {HttpClientModule} from '@angular/common/http';
+import { DeleteComponent } from './delete/delete.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CirFormComponent,
     IncidentListComponent,
-    EditCirFormComponent
-    //EditIncidentDialog
+    EditCirFormComponent,
+    DeleteComponent,
+    NavbarComponent
+
     
   ],
- entryComponents:[EditCirFormComponent],
+ entryComponents:[EditCirFormComponent,DeleteComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

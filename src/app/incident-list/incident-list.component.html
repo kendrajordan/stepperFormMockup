@@ -1,12 +1,12 @@
 
 
 
-<h2>Incidents table</h2>
+<h1 class='mat-h1' >Incidents table</h1>
 
 <mat-table [dataSource] = 'incidents'>
     <ng-container  matColumnDef="Incident Id">
         <mat-header-cell *matHeaderCellDef>Incident Id</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.incidentId}}</mat-cell>
+        <mat-cell *matCellDef="let incident">{{incident.id}}</mat-cell>
     </ng-container>
     <ng-container  matColumnDef="Incident Date">
         <mat-header-cell *matHeaderCellDef>incident Date</mat-header-cell>
@@ -30,8 +30,16 @@
     </ng-container>
     <ng-container  matColumnDef="Edit">
         <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-        <mat-cell *matCellDef="let incident"><button mat-raised-button (click)="openDialog(incident.incidentId)">Edit</button></mat-cell>
+        <mat-cell *matCellDef="let incident"><button mat-raised-button color="accent" (click)="openDialog(incident.id)">Edit</button></mat-cell>
+    </ng-container>
+    <ng-container  matColumnDef="Delete">
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+        <mat-cell *matCellDef="let incident"><button mat-raised-button color="warn" (click)="openDeleteDialog(incident.id)">Delete</button></mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
 <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
 </mat-table>
+<mat-paginator [length]="incidents.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

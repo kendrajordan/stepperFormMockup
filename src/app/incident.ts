@@ -1,5 +1,6 @@
+import {IPeopleInvolved} from './IPeopleInvolved';
 export interface incident {
-    incidentId:string;
+    id:number;
     incidentDate: string;
     location: string;
     incidentType: string;
@@ -7,7 +8,7 @@ export interface incident {
     region: string;
     county: string;
     supervisor:string;
-    peopleInvolved:any;
+    peopleInvolved:IPeopleInvolved[];
     narrative:string;
     correctiveAction:string;
     preventativeAction:string;

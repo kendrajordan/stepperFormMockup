@@ -2,7 +2,8 @@
 <mat-horizontal-stepper linear>
     
         <mat-step label="Incident Meta details" [stepControl]=" IncidentMetaDetails" >
-            <h1>Edit</h1>
+            <h1 *ngIf="incident">Edit Incident</h1>
+            <h1 *ngIf="!incident">Create an Incident</h1>
             <form  [formGroup]="IncidentMetaDetails">
                 <div class="container"  fxLayout.xs="column" fxLayout="row"  fxLayoutAlign="space-around">
                     <div class="container"  class="imd-box" id="date-location" >
@@ -65,7 +66,7 @@
         </form>
         </mat-step>
             <mat-step label="Who was involved" [stepControl]="WhoWasInvolved" >
-                <form  [formGroup]="WhoWasInvolved" >
+                <form [formGroup]="WhoWasInvolved" >
                     <div class="container" fxLayout="column">
                         <div class=" container who-box">
                             <mat-form-field>
@@ -81,8 +82,12 @@
                                 
                                     <mat-card *ngFor="let person of peopleInvolved.controls; let i = index;" [formGroupName]="i"class="container add-person-card" fxLayout="column"  fxLayoutAlign="center space-around" >
                                         <button *ngIf="peopleInvolved.controls.length > 1" mat-raised-button color="warn" (click)="removeAPerson(i)">Remove Person</button>
-                                        <input matInput  formControlName="firstname" placeholder="First Name" required>
-                                        <input matInput formControlName="lastname" placeholder="Last Name" required>
+                                        <mat-form-field>
+                                            <input matInput  formControlName="firstname" placeholder="First Name" required>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                             <input matInput formControlName="lastname" placeholder="Last Name" required>
+                                        </mat-form-field>
                                         <mat-form-field>
                                             <mat-label>Roles</mat-label>
                                             <mat-select formControlName="role" required>
@@ -104,7 +109,7 @@
   
     
         <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
-           <form [formGroup]="IncidentSpecificDetails">
+           <form   [formGroup]="IncidentSpecificDetails">
             <div class="details-container" fxLayout="row wrap" fxLayoutAlign= "space-between space-around"  fxLayoutGap="1%" >
                 <div class='id-box'>
                     <mat-form-field class="example-full-width">
@@ -129,13 +134,9 @@
             </div>
             <div class ='id-box'  class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%">
                 <button mat-raised-button matStepperPrevious type="button">Previous</button>
-                <button mat-raised-button color="primary" type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
+                <button mat-raised-button color="primary" type="submit" type="button" (click)='onSubmit(incident)' matStepperNext>Submit</button>
             </div>
     </form>
-      </mat-step>
-      <mat-step label="Done">
-            {{cirForm | json}}
-      </mat-step>
-          
+      </mat-step>          
   </mat-horizontal-stepper>
 </mat-card>

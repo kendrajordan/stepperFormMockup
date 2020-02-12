@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { IncidentService } from '../incident.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {EditCirFormComponent} from '../cir-form-edit/cir-form-edit.component';
+import {DeleteComponent} from '../delete/delete.component';
 @Component({
   selector: 'app-incident-list',
   templateUrl: './incident-list.component.html',
@@ -21,43 +22,25 @@ export class IncidentListComponent implements OnInit {
   }
 
 
-  tableColumns: string[] = ['Incident Id', 'Incident Date', 'Nature of Incident', 'Region','County','Location','Edit'];
+  tableColumns: string[] = ['Incident Id', 'Incident Date', 'Nature of Incident', 'Region','County','Location','Edit','Delete'];
 
-  getIncidentById(id){
-    return this.incidents.filter((item) => item.incidentId==id)[0];
-  }
   openDialog(id){
-    this.incident =this.getIncidentById(id);
-
     const dialogRef = this.dialog.open(EditCirFormComponent, {
       width: '50%',
-      data: {incident:this.incident}
+      data: {id:id}
     });
 
   }
-
-}
-export interface DialogData {
-incident:any;
-}
-/*@Component({
-  selector: 'edit-incident-dialog',
-  templateUrl: 'edit-incident-dialog.html',
-})
-export class EditIncidentDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<EditIncidentDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-    public incidents = [];
-    public errorMsg: string;
-
-    ngOnInit() {
-    }
-  onNoClick(): void {
-    this.dialogRef.close();
+  openDeleteDialog(id){
+    const dialogRef = this.dialog.open(DeleteComponent, {
+      width: '50%',
+      data: {id:id}
+    });
   }
+}
 
+export interface DialogData {
+id:number;
+}
 
-}*/
 
