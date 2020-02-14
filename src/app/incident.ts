@@ -1,6 +1,7 @@
 import {IPeopleInvolved} from './IPeopleInvolved';
 export interface incident {
     id:number;
+    incidentCreatorId:number;
     incidentDate: string;
     location: string;
     incidentType: string;

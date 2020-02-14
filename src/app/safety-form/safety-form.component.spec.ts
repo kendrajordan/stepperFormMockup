@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CirFormComponent } from './cir-form.component';
+import { SafetyFormComponent } from './safety-form.component';
 
-describe('CirFormComponent', () => {
-  let component: CirFormComponent;
-  let fixture: ComponentFixture<CirFormComponent>;
+describe('SafetyFormComponent', () => {
+  let component: SafetyFormComponent;
+  let fixture: ComponentFixture<SafetyFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CirFormComponent ]
+      declarations: [ SafetyFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CirFormComponent);
+    fixture = TestBed.createComponent(SafetyFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

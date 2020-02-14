@@ -6,7 +6,7 @@ import { incident } from '../incident';
 import {IPeopleInvolved} from '../IPeopleInvolved';
 import { DOCUMENT } from '@angular/common';
 export interface DialogData {
-  id: number;
+  incidentId: number;
 }
 @Component({
   selector: 'app-cir-form-edit',
@@ -26,21 +26,26 @@ export class EditCirFormComponent implements OnInit {
   IncidentMetaDetails: FormGroup;
   WhoWasInvolved: FormGroup;
   IncidentSpecificDetails: FormGroup;
-  cirForm: any;
+  cirForm: incident;
   myIncidentModel: any;
-  id: number;
+  incidentId: number;
   errorMsg: string;
   incident: incident;
   blank_incident: incident;
+  //TODO: remove incidentCreatorId# for testing
+  //3333 is Kendra's personId
+  incidentCreatorId = 3333;
+
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<EditCirFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private _incidentService: IncidentService, @Inject(DOCUMENT) private _document: Document) {
-    this.id = data.id;
+    this.incidentId = data.incidentId;
   }
 
   ngOnInit() {
-    if(this.id){
+    if(this.incidentId){
+
       this.loadIncidentData(this.blank_incident);
-      this._incidentService.getIncidentById(this.id)
+      this._incidentService.getIncidentById(this.incidentId)
       .subscribe(
         data => { this.loadIncidentData(data)},
         error => this.errorMsg = error);
@@ -91,11 +96,16 @@ export class EditCirFormComponent implements OnInit {
       ])
     });
     this.IncidentSpecificDetails = this.fb.group({
-      narrative: [this.incident.narrative, Validators.maxLength(600)],
-      correctiveAction: [this.incident.correctiveAction, Validators.maxLength(600)],
-      preventativeAction: [this.incident.preventativeAction, Validators.maxLength(600)],
-      afterCare: [this.incident.afterCare, Validators.required],
-      emergencyServices: [this.incident.emergencyServices, Validators.required]
+      narrative: [this.incident.narrative, [Validators.required,
+        Validators.maxLength(600)]],
+      correctiveAction: [this.incident.correctiveAction, [Validators.required,
+        Validators.maxLength(600)]],
+      preventativeAction: [this.incident.preventativeAction, [Validators.required,
+        Validators.maxLength(600)]],
+      afterCare: [this.incident.afterCare,[Validators.required,
+        Validators.maxLength(600)]],
+      emergencyServices: [this.incident.emergencyServices, [Validators.required,
+        Validators.maxLength(600)]]
     });
     this.WhoWasInvolved.setControl('peopleInvolved', this.setExistingPeople(people));
     
@@ -120,11 +130,16 @@ export class EditCirFormComponent implements OnInit {
       ])
     });
     this.IncidentSpecificDetails = this.fb.group({
-      narrative:['',Validators.maxLength(600)],
-      correctiveAction:['',Validators.maxLength(600)],
-      preventativeAction:['',Validators.maxLength(600)],
-      afterCare:['',Validators.required],
-      emergencyServices:['',Validators.required]
+      narrative:['',[Validators.required,
+        Validators.maxLength(600)]],
+      correctiveAction:['',[Validators.required,
+        Validators.maxLength(600)]],
+      preventativeAction:['',[Validators.required,
+        Validators.maxLength(600)]],
+      afterCare:['',[Validators.required,
+        Validators.maxLength(600)]],
+      emergencyServices:['',[Validators.required,
+        Validators.maxLength(600)]]
     });
    }
    
@@ -135,10 +150,11 @@ export class EditCirFormComponent implements OnInit {
       let step_1 = this.IncidentMetaDetails.status;
       let step_2 = this.WhoWasInvolved.status;
       let step_3 = this.IncidentSpecificDetails.status;
-  
+    console.log(this.IncidentSpecificDetails);
       if (step_1 == 'VALID' && step_2 == 'VALID' && step_3 == 'VALID') {
         const form: incident = {
           id: incident? incident.id : '',
+          incidentCreatorId:this.incidentCreatorId,
           incidentDate:this.IncidentMetaDetails.value.incidentDate,
           location: this.IncidentMetaDetails.value.location,
           incidentType: this.IncidentMetaDetails.value.incidentType,
@@ -154,8 +170,6 @@ export class EditCirFormComponent implements OnInit {
           emergencyServices:this.IncidentSpecificDetails.value.emergencyServices
         };
 
-        
-      
        
         if(incident){
           this.updateIncident(form);
@@ -187,6 +201,7 @@ export class EditCirFormComponent implements OnInit {
     this._incidentService.updateIncident(form)
     .subscribe(data => this.refreshPage() ,
     error =>console.log(error.message));
+
   }
   createIncident(form){
     this._incidentService.addAnIncident(form)

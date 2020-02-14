@@ -1,8 +1,9 @@
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { IncidentService } from '../incident.service'
+import { IncidentService } from '../incident.service';
+import { DOCUMENT } from '@angular/common';
 export interface DialogData {
-  id: number;
+  incidentId: number;
 };
 
 @Component({
@@ -11,12 +12,12 @@ export interface DialogData {
   styleUrls: ['./delete.component.scss']
 })
 export class DeleteComponent implements OnInit {
-  id:number;
+  incidentId:number;
   constructor(
     public dialogRef: MatDialogRef<DeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private _incidentService: IncidentService
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private _incidentService: IncidentService, @Inject(DOCUMENT) private _document: Document
   ) {
-    this.id = data.id;
+    this.incidentId = data.incidentId;
    }
 
   ngOnInit() {
@@ -27,7 +28,10 @@ export class DeleteComponent implements OnInit {
   }
   deleteIncident(id){
     this._incidentService.deleteIncident(id)
-    .subscribe(data =>console.log('Incident deleted'),
+    .subscribe( data =>this.refreshPage(),
     error =>console.log('There was an error'));
+  }
+  refreshPage() {
+    this._document.defaultView.location.reload();
   }
 }

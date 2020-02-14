@@ -3,42 +3,46 @@
 
 <h1 class='mat-h1' >Incidents table</h1>
 
-<mat-table [dataSource] = 'incidents'>
+<table mat-table [dataSource] = 'dataSource' matSort class="mat-elevation-z8" style="width:100%;">
     <ng-container  matColumnDef="Incident Id">
-        <mat-header-cell *matHeaderCellDef>Incident Id</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.id}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Incident Id</th>
+        <td mat-cell *matCellDef="let incident">{{incident.id}}</td>
     </ng-container>
     <ng-container  matColumnDef="Incident Date">
-        <mat-header-cell *matHeaderCellDef>incident Date</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.incidentDate | date:'shortDate'}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>incident Date</th>
+        <td mat-cell *matCellDef="let incident">{{incident.incidentDate | date:'shortDate'}}</td>
     </ng-container>
     <ng-container  matColumnDef="Nature of Incident">
-        <mat-header-cell *matHeaderCellDef>Nature of Incident</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.incidentType}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nature of Incident</th>
+        <td mat-cell *matCellDef="let incident">{{incident.incidentType}}</td>
     </ng-container>
     <ng-container  matColumnDef="Region">
-        <mat-header-cell *matHeaderCellDef>Region</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.region}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
+        <td mat-cell *matCellDef="let incident">{{incident.region}}</td>
     </ng-container>
     <ng-container  matColumnDef="County">
-        <mat-header-cell *matHeaderCellDef>County</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.county}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>County</th>
+        <td mat-cell *matCellDef="let incident">{{incident.county}}</td>
     </ng-container>
     <ng-container  matColumnDef="Location">
-        <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
-        <mat-cell *matCellDef="let incident">{{incident.location}}</mat-cell>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+        <td mat-cell *matCellDef="let incident">{{incident.location}}</td>
     </ng-container>
     <ng-container  matColumnDef="Edit">
-        <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-        <mat-cell *matCellDef="let incident"><button mat-raised-button color="accent" (click)="openDialog(incident.id)">Edit</button></mat-cell>
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-cell *matCellDef="let incident"><button mat-raised-button color="accent" (click)="openDialog(incident.id)">Edit</button></td>
     </ng-container>
     <ng-container  matColumnDef="Delete">
-        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-        <mat-cell *matCellDef="let incident"><button mat-raised-button color="warn" (click)="openDeleteDialog(incident.id)">Delete</button></mat-cell>
+        <th mat-header-cell *matHeaderCellDef>Delete</th>
+        <td mat-cell *matCellDef="let incident"><button mat-raised-button color="warn" (click)="openDeleteDialog(incident.id)">Delete</button></td>
     </ng-container>
-    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
-<mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
-</mat-table>
+    <ng-container  matColumnDef="Safety Remediation">
+        <th mat-header-cell *matHeaderCellDef>Safety Remediation</th>
+        <td mat-cell *matCellDef="let incident"><button mat-raised-button color="primary" (click)="openSafetyDialog(incident.id)">Safety Remediation</button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+</table>
 <mat-paginator [length]="incidents.length"
               [pageSize]="10"
               [pageSizeOptions]="[5, 10, 25, 100]">

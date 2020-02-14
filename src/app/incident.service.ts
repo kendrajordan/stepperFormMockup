@@ -16,6 +16,9 @@ private _url: string ="http://localhost:3000/incidents";
   
 
   }
+  getMyIncidents(incidentCreatorId){
+    return this.http.get<incident[]>(`${this._url}?${incidentCreatorId}`);
+  }
   getIncidentById(id):Observable<incident>{
 
     return this.http.get<incident>(`${this._url}/${id}`);

@@ -1,0 +1,43 @@
+<mat-card id="incident-stepper">
+<mat-horizontal-stepper linear>    
+        <mat-step  label="Incident Specific details" [stepControl]="IncidentSpecificDetails">
+           <form [formGroup]="IncidentSpecificDetails">
+            <div class="details-container" fxLayout="row wrap" fxLayoutAlign= "space-between space-around"  fxLayoutGap="1%" >
+                <div class='id-box'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Narrative of what happened" formControlName="narrative"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class='id-box'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Preventive Action" formControlName="preventativeAction"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class='id-box'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Corrective Actions Taken" formControlName="correctiveAction"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class='id-box'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="afterCare" formControlName="afterCare"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class='id-box'>
+                    <mat-form-field class="example-full-width">
+                        <textarea class="textbox" matInput placeholder="Emergency Services" formControlName="emergencyServices"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class ='id-box'  class="row-container" fxLayout="row"  fxLayoutAlign= "center space-around"  fxLayoutGap="1%">
+                <button mat-raised-button matStepperPrevious type="button">Previous</button>
+                <button mat-raised-button color="primary" type="submit" type="button" (click)='onSubmit()' matStepperNext>Submit</button>
+            </div>
+    </form>
+      </mat-step>
+      <mat-step label="Done">
+            {{cirForm | json}}
+      </mat-step>
+          
+  </mat-horizontal-stepper>
+</mat-card>
