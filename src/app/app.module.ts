@@ -16,6 +16,11 @@ import { DeleteComponent } from './delete/delete.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PdfComponent } from './pdf/pdf.component';
+import { OptionsDialogComponent } from './options-dialog/options-dialog.component';
+import { HomeComponent } from './home/home.component';
+import { IncidentDetailsComponent } from './incident-details/incident-details.component';
+import { SafetyRemediationsDetailsComponent } from './safety-remediations-details/safety-remediations-details.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +31,16 @@ import { PdfComponent } from './pdf/pdf.component';
     DeleteComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    PdfComponent
+    PdfComponent,
+    OptionsDialogComponent,
+    HomeComponent,
+    IncidentDetailsComponent,
+    SafetyRemediationsDetailsComponent,
+    LoginComponent,
 
     
   ],
- entryComponents:[EditCirFormComponent,DeleteComponent,SafetyFormComponent],
+ entryComponents:[EditCirFormComponent,DeleteComponent,SafetyFormComponent,OptionsDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

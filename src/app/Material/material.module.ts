@@ -19,10 +19,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSortModule} from '@angular/material/sort';
-
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 const materialComponents = [ MatSliderModule,MatCardModule,MatStepperModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatIconModule,MatNativeDateModule,MatRadioModule,MatSelectModule,MatGridListModule,MatButtonModule,ScrollingModule,MatTableModule,MatDialogModule,MatPaginatorModule,MatToolbarModule,
-  MatTabsModule,MatMenuModule,MatSortModule];
+  MatTabsModule,MatMenuModule,MatSortModule,MatDividerModule,MatListModule];
 @NgModule ({
   imports: [materialComponents],
   exports:[materialComponents],

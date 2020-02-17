@@ -1,8 +1,37 @@
-<button mat-button mat-raised-button color="warn" (click)="downloadPDF()">pdf</button>
+{{incident |json}}
 
-<div id="parentdiv">
-    <!-- html content goes here -->
-    <span style="color:red">Hello can you see me?</span>
-  </div>
+
+<!--<ul id="incidentDetails" >
+  <li>
+     <h3> Incident Id:</h3> 
+      {{incident.id}}
+  </li>
+  <hr>
+  <li>
+    <h3> Incident Date:</h3> 
+     {{incident.incidentDate | date: 'shortDate'}}
+ </li>
+ <hr>
+ <li>
+  <h3> Location:</h3> 
+   {{incident.location}}
+</li>
+<hr>
+<li>
+  <h3> Nature of Incident:</h3> 
+   {{incident.incidentType}}
+</li>
+<hr>
+<li>
+  <h3> Region:</h3> 
+   {{incident.region}}
+</li>
+<hr>
+<li>
+  <h3> county:</h3> 
+   {{incident.county}}
+</li>
+<hr>
+</ul>-->
 
 

@@ -1,34 +1,36 @@
 
 
 
-<h1 class='mat-h1' >Incidents table</h1>
+<mat-form-field>
+    <input matInput type="text" placeholder="Filter" (keyup)="applyFilter($event.target.value)">
+</mat-form-field>
 
-<table mat-table [dataSource] = 'dataSource' matSort class="mat-elevation-z8" style="width:100%;">
-    <ng-container  matColumnDef="Incident Id">
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container  matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Incident Id</th>
         <td mat-cell *matCellDef="let incident">{{incident.id}}</td>
     </ng-container>
-    <ng-container  matColumnDef="Incident Date">
+    <ng-container  matColumnDef="incidentDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>incident Date</th>
         <td mat-cell *matCellDef="let incident">{{incident.incidentDate | date:'shortDate'}}</td>
     </ng-container>
-    <ng-container  matColumnDef="Nature of Incident">
+    <ng-container  matColumnDef="incidentType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nature of Incident</th>
         <td mat-cell *matCellDef="let incident">{{incident.incidentType}}</td>
     </ng-container>
-    <ng-container  matColumnDef="Region">
+    <ng-container  matColumnDef="region">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
         <td mat-cell *matCellDef="let incident">{{incident.region}}</td>
     </ng-container>
-    <ng-container  matColumnDef="County">
+    <ng-container  matColumnDef="county">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>County</th>
         <td mat-cell *matCellDef="let incident">{{incident.county}}</td>
     </ng-container>
-    <ng-container  matColumnDef="Location">
+    <ng-container  matColumnDef="location">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
         <td mat-cell *matCellDef="let incident">{{incident.location}}</td>
     </ng-container>
-    <ng-container  matColumnDef="Edit">
+    <!--<ng-container  matColumnDef="Edit">
         <th mat-header-cell *matHeaderCellDef>Edit</th>
         <td mat-cell *matCellDef="let incident"><button mat-raised-button color="accent" (click)="openDialog(incident.id)">Edit</button></td>
     </ng-container>
@@ -39,11 +41,12 @@
     <ng-container  matColumnDef="Safety Remediation">
         <th mat-header-cell *matHeaderCellDef>Safety Remediation</th>
         <td mat-cell *matCellDef="let incident"><button mat-raised-button color="primary" (click)="openSafetyDialog(incident.id)">Safety Remediation</button></td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
-<tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+    </ng-container>-->
+    <tr mat-header-row *matHeaderRowDef="tableColumns;"></tr>
+<tr mat-row *matRowDef="let row; columns: tableColumns;" (click)="openOptionsDialog(row);highlightedRows[0]=row"
+             [style.background]="highlightedRows.indexOf(row) != -1 ? 'lightblue' : ''"></tr>
 </table>
-<mat-paginator [length]="incidents.length"
+<mat-paginator 
               [pageSize]="10"
               [pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>

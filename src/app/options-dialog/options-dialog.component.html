@@ -1,0 +1,46 @@
+  
+<h2>Options</h2>
+<div class="container" fxLayout="row" fxLayoutAlign="space-between center">
+
+
+<mat-card class="option-card">
+    <mat-card-header>
+      <mat-card-title>Edit</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Make edits to this entry.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="openEditDialog(data.rowdata.id)">Edit</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="option-card">
+    <mat-card-header>
+      <mat-card-title>View Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        View all details of this entry.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+    <button mat-raised-button routerLink="/incidents/incidentdetails/{{data.rowdata.id}}" routerLinkActive="active" (click)="onNoClick()">View</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="option-card">
+    <mat-card-header>
+      <mat-card-title>Delete</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        Delete this entry.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="openDeleteDialog(data.rowdata.id)">Delete</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
